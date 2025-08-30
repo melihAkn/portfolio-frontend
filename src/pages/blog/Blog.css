@@ -1,0 +1,32 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Sayfa ortalaması */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* dikey ortala */
+  align-items: center;     /* yatay ortala */
+  height: 100%;            /* container artık tüm yüksekliği kaplar */
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+/* Başlık stili */
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+/* Alt yazı stili */
+.subtitle {
+  font-size: 1.5rem;
+  color: #666;
+  margin-top: 1rem;
+}

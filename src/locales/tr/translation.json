@@ -1,0 +1,19 @@
+
+{
+  "hero": {
+    "greeting": "Merhaba, ben Melih",
+    "title": "Backend Geliştirici | Yapay Zeka Meraklısı",
+    "viewProjects": "Projeleri Gör",
+    "contactMe": "İletişime Geç"
+  },
+  "about": {
+    "title": "Hakkımda",
+    "description": ".NET Core ve Node.js alanında uzmanlaşmış, yapay zekaya ilgi duyan bir backend geliştiricisiyim."
+  },
+  "nav": {
+    "about" : "hakkımda",
+    "projects" : "projelerim",
+    "contact" : "iletişim",
+    "blog" : "blog"
+  }
+}

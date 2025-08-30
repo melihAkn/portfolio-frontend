@@ -1,0 +1,18 @@
+{
+  "hero": {
+    "greeting": "Hi, I'm Melih",
+    "title": "Backend Developer | AI Enthusiast",
+    "viewProjects": "View Projects",
+    "contactMe": "Contact Me"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "I'm a passionate backend developer specializing in .NET Core and Node.js, with a strong interest in artificial intelligence."
+  },
+  "nav": {
+    "about": "about me",
+    "projects": "projects",
+    "contact": "contact",
+    "blog": "blog"
+  }
+}
