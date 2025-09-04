@@ -92,7 +92,7 @@ body {
 
 /* Projects Section */
 .projects {
-  background: #f9f9f9;
+  background: #222;
   padding: 80px 20px;
 }
 
@@ -251,7 +251,7 @@ footer {
 
 .nav-links li a {
   text-decoration: none;
-  color: #333;
+  color: #222;
   font-weight: 600;
   transition: color 0.3s;
 }

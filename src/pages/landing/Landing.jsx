@@ -2,7 +2,7 @@
 import './Landing.css';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from "../../components/Navbar.jsx";
 import '../../i18n';
 const Landing = () => {
@@ -16,23 +16,30 @@ const Landing = () => {
         }
     }, [i18n]);
 
-    const projects = [
-        {
-            title: "Apartment Management System",
-            description: "apartman yönetim sistemi",
-            img: "/assets/project1.png",
-        },
-        {
-            title: "CircleSupport",
-            description: "Anonymous community advice platform powered by AI.",
-            img: "/assets/project2.png",
-        },
-        {
-            title: "Portfolio Website",
-            description: "Personal portfolio site with i18n, React, and responsive design.",
-            img: "/assets/project3.png",
-        },
-    ];
+    const [projects, setProjects] = useState([])
+  
+    useEffect(() => {
+    const getProjects = async () => {
+      try{
+      const res = await fetch("http://localhost:5170/portfolio/get-projects", {
+        method : "GET"
+      })
+  
+      if(!res.ok){
+        setProjects([{error : "hata oluştu"}])
+        return
+      }
+      const data = await res.json()
+      console.log(data)
+      setProjects(Array.isArray(data) ? data : [data])
+      }
+      catch(err){
+        console.error(err)
+        setProjects([{error : "sunucu hatası"}])
+      }
+    }
+    getProjects()
+  }, [])
     function truncate(text, maxLength) {
         return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
     }
@@ -66,11 +73,12 @@ const Landing = () => {
                             <img src={proj.img} alt={proj.title} />
                             <h3>{proj.title}</h3>
                             <p>{truncate(proj.description, 120)}</p>
+                            <a href={`/project/${proj.id}`} className="btn-secondary">View Details</a>
                         </div>
                     ))}
                 </div>
                 <div style={{ textAlign: "center", marginTop: "30px" }}>
-                    <a href="/projects" className="btn primary">View All Projects</a>
+                    <a href="/projects" className="btn-primary">View All Projects</a>
                 </div>
             </section>
 

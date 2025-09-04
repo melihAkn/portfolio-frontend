@@ -1,24 +1,69 @@
 import { useParams, Link } from "react-router-dom";
-
-const projects = [
-  { id: 1, title: "CircleSupport", desc: "Anonymous community support platform where users can ask and answer questions in different categories. Includes AI suggestions and mentor features." },
-  { id: 2, title: "Smart Greenhouse", desc: "Greenhouse automation project built with Java Swing and MySQL. Includes temperature/moisture tracking, watering system, and harvest planning." },
-  { id: 3, title: "Library Automation", desc: "Library management system with modules for member registration, book lending/returning, e-book management, and admin editing features." },
-];
-
+import ReactMarkdown from "react-markdown";
+import "./ProjectDetailPage.css";
+import { useState, useEffect } from "react";
+import Navbar from "./../../components/Navbar.jsx"
 export default function ProjectDetailPage() {
   const { id } = useParams();
-  const project = projects.find((p) => p.id === Number(id));
+    const [project, setProject] = useState([])
+  
+    useEffect(() => {
+    const getProject = async () => {
+      try{
+      const res = await fetch(`http://localhost:5170/portfolio/get-projects/${id}`, {
+        method : "GET"
+      })
+  
+      if(!res.ok){
+        setProject([{error : "hata oluştu"}])
+        return
+      }
+      const data = await res.json()
+      console.log(data)
+      setProject(Array.isArray(data) ? data : [data])
+      }
+      catch(err){
+        console.error(err)
+        setProject([{error : "sunucu hatası"}])
+      }
+    }
+    getProject()
+  }, [])
 
-  if (!project) {
-    return <h2>Project not found</h2>;
-  }
 
   return (
-    <div className="project-detail">
-      <h1>{project.title}</h1>
-      <p>{project.desc}</p>
-      <Link to="/projects" className="back-btn">← Back to Projects</Link>
-    </div>
+    <div className="entire-page">
+    <Navbar/>
+  <div className="page-grid">
+    <aside className="sidebar left-sidebar">
+      <div className="ad-box">Ad / Extra Content</div>
+    </aside>
+
+    <main className="main-content">
+      <div className="blog-content">
+        {project.length > 0 ? (
+          <>
+            <h1 className="blog-title">{project[0].title}</h1>
+            <div className="markdown-body">
+              <ReactMarkdown>{project[0].content}</ReactMarkdown>
+            </div>
+          </>
+        ) : (
+          <p>Loading project...</p>
+        )}
+
+        <div className="blog-footer">
+          <Link to="/projects" className="back-link">
+            ← Back to Projects
+          </Link>
+        </div>
+      </div>
+    </main>
+
+    <aside className="sidebar right-sidebar">
+      <div className="ad-box">Ad / Extra Content</div>
+    </aside>
+  </div>
+  </div>
   );
 }

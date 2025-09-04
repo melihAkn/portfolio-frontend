@@ -1,0 +1,110 @@
+.projects-page-container {
+    padding: 100px 20px 40px;
+    margin: 0 auto;
+}
+
+.projects-page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #333;
+    width: 1800px;
+}
+
+/* Her kart tam genişlik */
+.projects-page-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.projects-page-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+    /* Tam genişlik */
+    display: flex;
+    flex-direction: column;
+    /* Büyük ekranlarda dikey */
+    align-items: start;
+    /* İçeriği sola hizala */
+}
+
+.projects-page-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.projects-page-content {
+    width: 100%;
+    /* İçerik kartın tamamını kaplasın */
+}
+
+.projects-page-content-title {
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+.projects-page-description {
+    color: #666;
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.projects-page-tech-info {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.projects-page-btn-secondary {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border: 2px solid #6C63FF;
+    color: #6C63FF;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.projects-page-btn-secondary:hover {
+    background-color: #6C63FF;
+    color: white;
+}
+
+/* Büyük ekranlarda kartlar tam genişlikte */
+@media (min-width: 1024px) {
+    .projects-page-card {
+        flex-direction: row;
+        /* resim vs içerik yan yana */
+        align-items: center;
+    }
+
+    .projects-page-card-img {
+        width: 300px;
+        /* resim sabit */
+        height: auto;
+        margin-right: 30px;
+    }
+}
+
+/* Mobil uyumlu */
+@media (max-width: 1023px) {
+    .projects-page-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .projects-page-card-img {
+        width: 100%;
+        max-width: 100%;
+    }
+}

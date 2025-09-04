@@ -1,28 +1,68 @@
-import { Link } from "react-router-dom";
-import Navbar from "../../components/Navbar.jsx";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
+import { useTranslation } from 'react-i18next';
+import './Projects.css';
 
-const projects = [
-    { id: 1, title: "CircleSupport", desc: "Anonymous community support platform." },
-    { id: 2, title: "Smart Greenhouse", desc: "Java Swing project for greenhouse automation." },
-    { id: 3, title: "Library Automation", desc: "Book borrowing and e-book management system." },
-];
+const Projects = () => {
+  const { t } = useTranslation();
+  const [projects, setProjects] = useState([])
 
-export default function ProjectsPage() {
-    return (
+  useEffect(() => {
+  const getProjects = async () => {
+    try{
+    const res = await fetch("http://localhost:5170/portfolio/get-projects", {
+      method : "GET"
+    })
+
+    if(!res.ok){
+      setProjects([{error : "hata oluştu"}])
+      return
+    }
+    const data = await res.json()
+    console.log(data)
+    setProjects(Array.isArray(data) ? data : [data])
+    }
+    catch(err){
+      console.error(err)
+      setProjects([{error : "sunucu hatası"}])
+    }
+  }
+  getProjects()
+}, [])
+  function truncate(text, maxLength) {
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+  }
+
+  return (
     <div>
-    <Navbar />
-    <section className="projects-page">
-      <h1>My Projects</h1>
-      <div className="project-list">
-        {projects.map((p) => (
-          <div key={p.id} className="project-card">
-            <h2>{p.title}</h2>
-            <p>{p.desc.length > 80 ? p.desc.slice(0, 80) + "..." : p.desc}</p>
-            <Link to={`/project/${p.id}`} className="view-btn">View Details</Link>
-          </div>
-        ))}
+      <Navbar />
+      <div className="projects-page-container">
+        <h2 className="projects-page-title">{t('projects.title')}</h2>
+        <div className="projects-page-list">
+          {projects.map((proj) => (
+            <div className="projects-page-card" key={proj.id}>
+              <img src={proj.img} alt={proj.title} className="projects-page-card-img" />
+              <div className="projects-page-content">
+                <h3 className="projects-page-content-title">{proj.title}</h3>
+                <p className="projects-page-description">
+                  {truncate(proj.description, 120)}
+                </p>
+                <div className="projects-page-tech-info">
+                  <strong>Backend:</strong> {proj.backendTechStack || 'N/A'}
+                  <br />
+                  <strong>Database:</strong> {proj.frontendTechStack || 'N/A'}
+                </div>
+                <Link to={`/project/${proj.id}`} className="projects-page-btn-secondary">
+                  View Details
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </section>
     </div>
-    );
-}
+  );
+};
+
+export default Projects;

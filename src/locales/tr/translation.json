@@ -15,5 +15,8 @@
     "projects" : "projelerim",
     "contact" : "iletişim",
     "blog" : "blog"
+  },
+  "projects" : {
+    "title" : "projeler"
   }
 }
