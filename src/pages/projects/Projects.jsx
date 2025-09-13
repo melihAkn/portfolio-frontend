@@ -7,29 +7,34 @@ import './Projects.css';
 const Projects = () => {
   const { t } = useTranslation();
   const [projects, setProjects] = useState([])
+  const savedLanguage = localStorage.getItem("appLanguage");
 
   useEffect(() => {
-  const getProjects = async () => {
-    try{
-    const res = await fetch("http://localhost:5170/portfolio/get-projects", {
-      method : "GET"
-    })
+    const getProjects = async () => {
+      try {
+        const res = await fetch("http://localhost:5170/portfolio/get-projects", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ lang: savedLanguage })
+        })
 
-    if(!res.ok){
-      setProjects([{error : "hata oluştu"}])
-      return
+        if (!res.ok) {
+          setProjects([{ error: "hata oluştu" }])
+          return
+        }
+        const data = await res.json()
+        console.log(data)
+        setProjects(Array.isArray(data) ? data : [data])
+      }
+      catch (err) {
+        console.error(err)
+        setProjects([{ error: "sunucu hatası" }])
+      }
     }
-    const data = await res.json()
-    console.log(data)
-    setProjects(Array.isArray(data) ? data : [data])
-    }
-    catch(err){
-      console.error(err)
-      setProjects([{error : "sunucu hatası"}])
-    }
-  }
-  getProjects()
-}, [])
+    getProjects()
+  }, [savedLanguage])
   function truncate(text, maxLength) {
     return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
   }

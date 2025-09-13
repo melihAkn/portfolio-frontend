@@ -17,6 +17,19 @@
   }
   ,
   "projects" : {
-    "title" : "projects"
+    "title" : "projects",
+    "viewDetails" : "View Details",
+    "viewAllProjects" : "View All Projects"
+  },
+    "contact" : {
+    "title" : "contact me",
+    "yourName" : "your name",
+    "yourEmail" : "your e-mail",
+    "yourMessage" : "your message",
+    "sendMessage" : "send message",
+    "sendMeAnEmail" : "or send me an email"
+  },
+  "footer" : {
+    "copyright" : "© 2025 Melih Akn. All right reserved."
   }
 }

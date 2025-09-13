@@ -35,3 +35,18 @@
 .nav-links li a:hover {
   color: #6C63FF;
 }
+
+.language-select {
+    margin-left: 20px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #000000;
+    cursor: pointer;
+}
+
+.language-select:focus {
+    outline: none;
+    border-color: #666;
+}

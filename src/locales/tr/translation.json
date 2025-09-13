@@ -17,6 +17,19 @@
     "blog" : "blog"
   },
   "projects" : {
-    "title" : "projeler"
+    "title" : "Projeler",
+    "viewDetails" : "detayları Gör",
+    "viewAllProjects" : "tüm Projeleri Gör"
+  },
+  "contact" : {
+    "title" : "benimle iletişime geç",
+    "yourName" : "isminiz",
+    "yourEmail" : "mail adresiniz",
+    "yourMessage" : "mesajınız",
+    "sendMessage" : "mesajı gönder",
+    "sendMeAnEmail" : "veya bana direkt olarak mail gönderin"
+  },
+  "footer" : {
+    "copyright" : "© 2025 Melih Akn. Tüm hakları saklıdır."
   }
 }
